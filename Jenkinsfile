@@ -25,6 +25,7 @@ pipeline {
                 sh 'dotnet test'
                 }
             }
+        }
         stage('build npm') {
             steps {
                 echo 'Building npm..'
