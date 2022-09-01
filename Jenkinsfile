@@ -2,11 +2,13 @@ pipeline {
     agent {
         docker { image 'mono:latest' }
     }
-    environment {
-            DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
-    }
+
 
     stages {
+
+        environment {
+            DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
+        }
 
         stage('Checkout') {
             steps {
@@ -14,14 +16,19 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
+        stage('Build dotnet') {
             steps {
-                echo 'Building..'
+                echo 'Building dotnet..'
 
                 dir('DotnetTemplate.Web') {
                 sh 'dotnet build'
                 sh 'dotnet test'
                 }
+            }
+        stage('build npm') {
+            steps {
+                echo 'Building npm..'
+        
                 dir('DonetTemplate.Web.Tests') {
                 sh "npm ci"
                 sh "npm run build"
