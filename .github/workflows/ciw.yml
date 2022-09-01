@@ -20,6 +20,6 @@ jobs:
         npm run build
       
     - name: npm t
-      working-directory: DotnetTemplate.Web.Tests
+      working-directory: DotnetTemplate.Web
       run: npm t
     
