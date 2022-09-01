@@ -1,31 +1,16 @@
 pipeline {
     agent none
 
-
-
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Checkout..'
-                checkout scm
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         stage('Build dotnet') {
+            
+            stage('Checkout') {
+                steps {
+                    echo 'Checkout..'
+                    checkout scm
+                }
+            }
             agent {
                 docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
             }
