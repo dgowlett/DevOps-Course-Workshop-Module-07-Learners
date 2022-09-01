@@ -22,6 +22,9 @@ pipeline {
 
                 dir('DotnetTemplate.Web') {
                 sh 'dotnet build'
+                sh 'dotnet test'
+                }
+                dir('DonetTemplate.Web.Tests') {
                 sh "npm ci"
                 sh "npm run build"
                 }
@@ -29,7 +32,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+ 
+                dir('DotnetTemplate.Web') {
+                               echo 'Testing npm TypeScript tests..'
+                sh "npm t"
+                               echo 'Testing npm linting on the TypeScript..'
+                sh "npm run lint"
+                }
             }
         }
         stage('Deploy') {
