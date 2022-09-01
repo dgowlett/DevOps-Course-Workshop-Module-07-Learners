@@ -1,5 +1,3 @@
-#docker { image 'node:17-bullseye' }
-
 pipeline {
     agent {
         docker { image 'mono:latest' }
