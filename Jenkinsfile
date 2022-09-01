@@ -45,7 +45,7 @@ pipeline {
                 docker { image 'node:17-bullseye' }
             }
             stages {
-                stage('build npm') {
+                stage('build npm steps') {
                         steps {
                             echo 'Building npm..'
                             dir('DotnetTemplate.Web') {
