@@ -12,7 +12,6 @@ pipeline {
                 echo 'Checkout..'
                 checkout scm
             }
-
             environment {
                 DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
             }
@@ -22,14 +21,12 @@ pipeline {
                         echo 'Building dotnet..'
                         dir('DotnetTemplate.Web') {
                             sh 'dotnet build'
-                            sh 'dotnet test'
                         }
                     }
                 }
                 stage('Test dotnet') {
                         steps {
                             echo 'test dotnet..'
-
                             dir('DotnetTemplate.Web') {
                                 sh 'dotnet test'
                             }
@@ -48,16 +45,12 @@ pipeline {
                 echo 'Checkout..'
                 checkout scm
             }
-
-            stages {
-                stage('build npm steps') {
-                        steps {
-                            echo 'Building npm..'
-                            dir('DotnetTemplate.Web') {
-                            sh "npm ci"
-                            sh "npm run build"
-                            }
-                        }
+                        
+            steps {
+                    echo 'Building npm..'
+                    dir('DotnetTemplate.Web') {
+                    sh "npm ci"
+                    sh "npm run build"
                 }
             }
         }
