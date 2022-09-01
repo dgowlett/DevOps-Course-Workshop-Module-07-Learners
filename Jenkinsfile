@@ -8,10 +8,10 @@ pipeline {
             agent {
                 docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
             }
-                steps {
-                    echo 'Checkout..'
-                    checkout scm
-                }
+            steps {
+                echo 'Checkout..'
+                checkout scm
+            }
 
             environment {
                 DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
@@ -40,14 +40,15 @@ pipeline {
         }
 
         stage('build npm') {
-            
+
             agent {
                 docker { image 'node:17-bullseye' }
             }
-                steps {
-                    echo 'Checkout..'
-                    checkout scm
-                }
+            steps {
+                echo 'Checkout..'
+                checkout scm
+            }
+
             stages {
                 stage('build npm steps') {
                         steps {
@@ -60,6 +61,10 @@ pipeline {
                 }
             }
         }
+
+
+
+
         stage('Test') {
             steps {
  
@@ -71,5 +76,9 @@ pipeline {
                 }
             }
         }
+
+
+
+
     }
 }
