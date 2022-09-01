@@ -32,6 +32,7 @@ pipeline {
                 dir('DotnetTemplate.Web') {
                 sh "pwd"
                 sh "env"
+                sh "ls -l"
                 sh "npm ci"
                 sh "npm run build"
                 }
