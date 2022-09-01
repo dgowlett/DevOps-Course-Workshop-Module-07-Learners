@@ -6,10 +6,6 @@ pipeline {
 
     stages {
 
-        environment {
-            DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
-        }
-
         stage('Checkout') {
             steps {
                 echo 'Checkout..'
@@ -17,6 +13,9 @@ pipeline {
             }
         }
         stage('Build dotnet') {
+            environment {
+                DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
+            }
             steps {
                 echo 'Building dotnet..'
 
