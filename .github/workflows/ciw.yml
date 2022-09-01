@@ -20,5 +20,6 @@ jobs:
         npm run build
       
     - name: npm t
+      working-directory: DotnetTemplate.web
       run: npm t
     
