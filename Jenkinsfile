@@ -3,14 +3,16 @@ pipeline {
 
     stages {
 
-        stage('Build dotnet') {
-            
-            stage('Checkout') {
+        stage('Checkout') {
                 steps {
                     echo 'Checkout..'
                     checkout scm
                 }
-            }
+        }
+        
+        stage('Build dotnet') {
+            
+
             agent {
                 docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
             }
