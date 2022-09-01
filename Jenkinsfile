@@ -3,14 +3,19 @@ pipeline {
 
     stages {
 
-        stage('Build dotnet') {
-            
+        stage('checkout') {
             agent {
                 docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
             }
             steps {
                 echo 'Checkout..'
                 checkout scm
+            }
+        }
+        stage('Build dotnet') {
+            
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
             }
             environment {
                 DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
@@ -41,11 +46,7 @@ pipeline {
             agent {
                 docker { image 'node:17-bullseye' }
             }
-            steps {
-                echo 'Checkout..'
-                checkout scm
-            }
-                        
+        
             steps {
                     echo 'Building npm..'
                     dir('DotnetTemplate.Web') {
@@ -53,6 +54,7 @@ pipeline {
                     sh "npm run build"
                 }
             }
+
         }
 
 
