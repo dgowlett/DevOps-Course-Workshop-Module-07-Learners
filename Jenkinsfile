@@ -33,7 +33,7 @@ pipeline {
                 sh "pwd"
                 sh "env"
                 sh "ls -l"
-                sh "sudo apt-get install npm"
+                sh "apt install npm"
                 sh "npm ci"
                 sh "npm run build"
                 }
