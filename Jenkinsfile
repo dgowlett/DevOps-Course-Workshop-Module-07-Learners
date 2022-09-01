@@ -1,6 +1,11 @@
+#docker { image 'node:17-bullseye' }
+
 pipeline {
     agent {
-        docker { image 'node:17-bullseye' }
+        docker { image 'mono:latest' }
+    }
+    environment {
+            DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
     }
 
     stages {
@@ -14,7 +19,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+
                 dir('DotnetTemplate.Web') {
+                sh 'dotnet build'
                 sh "npm ci"
                 sh "npm run build"
                 }
