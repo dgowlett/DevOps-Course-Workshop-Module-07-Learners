@@ -40,6 +40,7 @@ pipeline {
         }
 
         stage('build npm') {
+            
             agent {
                 docker { image 'node:17-bullseye' }
             }
