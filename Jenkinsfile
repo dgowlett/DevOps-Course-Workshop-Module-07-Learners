@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Building npm..'
         
-                dir('DonetTemplate.Web.Tests') {
+                dir('DonetTemplate.Web') {
                 sh "npm ci"
                 sh "npm run build"
                 }
