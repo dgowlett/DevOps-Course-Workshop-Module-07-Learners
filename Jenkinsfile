@@ -14,9 +14,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                dir('DotnetTemplate.Web')
+                dir('DotnetTemplate.Web') {
                 sh "npm ci"
                 sh "npm run build"
+                }
             }
         }
         stage('Test') {
