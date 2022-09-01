@@ -1,7 +1,6 @@
 pipeline {
-    agent {
-        docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
-    }
+    agent none
+
 
 
     stages {
@@ -12,30 +11,63 @@ pipeline {
                 checkout scm
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         stage('Build dotnet') {
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
+            }
             environment {
                 DOTNET_CLI_HOME = '/tmp/dornet_cli_home'
             }
-            steps {
-                echo 'Building dotnet..'
+            stages {
+                stage('Build dotnet') {
+                    steps {
+                        echo 'Building dotnet..'
+                        dir('DotnetTemplate.Web') {
+                            sh 'dotnet build'
+                            sh 'dotnet test'
+                        }
+                    }
+                }
+                stage('Test dotnet') {
+                        steps {
+                            echo 'test dotnet..'
 
-                dir('DotnetTemplate.Web') {
-                sh 'dotnet build'
-                sh 'dotnet test'
+                            dir('DotnetTemplate.Web') {
+                                sh 'dotnet test'
+                            }
+                        }
+
                 }
             }
         }
+
         stage('build npm') {
-            steps {
-                echo 'Building npm..'
-        
-                dir('DotnetTemplate.Web') {
-                sh "pwd"
-                sh "env"
-                sh "ls -l"
-                sh "apt install npm"
-                sh "npm ci"
-                sh "npm run build"
+            agent {
+                docker { image 'node:17-bullseye' }
+            }
+            stages {
+                stage('build npm') {
+                        steps {
+                            echo 'Building npm..'
+                            dir('DotnetTemplate.Web') {
+                            sh "npm ci"
+                            sh "npm run build"
+                            }
+                        }
                 }
             }
         }
