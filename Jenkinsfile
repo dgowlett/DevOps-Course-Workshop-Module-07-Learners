@@ -33,6 +33,7 @@ pipeline {
                 sh "pwd"
                 sh "env"
                 sh "ls -l"
+                sh "apt-get"
                 sh "npm ci"
                 sh "npm run build"
                 }
