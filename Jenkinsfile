@@ -30,10 +30,6 @@ pipeline {
                 echo 'Building npm..'
         
                 dir('DotnetTemplate.Web') {
-                
-                sh "pwd"
-                sh "env"
-
                 sh "npm ci"
                 sh "npm run build"
                 }
