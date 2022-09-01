@@ -61,6 +61,9 @@ pipeline {
 
 
         stage('Test') {
+            agent {
+                docker { image 'node:17-bullseye' }
+            }
             steps {
  
                 dir('DotnetTemplate.Web') {
